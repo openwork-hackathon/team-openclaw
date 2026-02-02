@@ -1,0 +1,22 @@
+{
+  "name": "openclaw-agent",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.x",
+    "react": "18.x",
+    "viem": "^2.x",
+    "@supabase/supabase-js": "^2.x"
+  },
+  "devDependencies": {
+    "@types/node": "20.x",
+    "@types/react": "18.x",
+    "typescript": "5.x"
+  }
+}
