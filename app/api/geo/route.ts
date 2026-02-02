@@ -1,13 +1,14 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { geoAnalyzer } from '../../lib/geo/analyzer';
 
-// Placeholder for geopolitical analysis endpoint
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const topic = searchParams.get('q') || 'general';
-  
-  return NextResponse.json({
-    topic,
-    status: 'planned',
-    message: 'Geopolitical analysis service - Issue #2'
-  });
+export async function GET(request: NextRequest) {
+  const topic = request.nextUrl.searchParams.get('q');
+  if (!topic) return NextResponse.json({ error: 'Missing ?q=topic' }, { status: 400 });
+  return NextResponse.json(await geoAnalyzer.analyzeTopic(topic));
+}
+
+export async function POST(request: NextRequest) {
+  const { topic } = await request.json();
+  if (!topic) return NextResponse.json({ error: 'Missing topic' }, { status: 400 });
+  return NextResponse.json(await geoAnalyzer.analyzeTopic(topic));
 }
