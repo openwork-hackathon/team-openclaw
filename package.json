@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy:token": "tsx scripts/deploy-token.ts"
   },
   "dependencies": {
     "next": "14.x",
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@types/node": "20.x",
     "@types/react": "18.x",
-    "typescript": "5.x"
+    "typescript": "5.x",
+    "tsx": "^4.x"
   }
 }
