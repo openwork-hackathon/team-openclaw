@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <div className="max-w-7xl mx-auto space-y-6 py-8">
       {/* Top terminal bar */}
-      <div className="terminal-panel border px-4 py-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+      <div className="panel panel-hover px-4 py-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
           <div className="font-terminal text-xs text-slate-400">OPENCLAW ▸ DASHBOARD</div>
           <div className="hidden md:block text-slate-700">|</div>
@@ -15,11 +15,11 @@ export default function Page() {
           <div className="font-terminal text-xs text-slate-400">REGION: GLOBAL</div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/25 bg-emerald-500/10 text-emerald-200 text-xs font-terminal">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="badge font-terminal text-xs text-emerald-200 border-emerald-500/25 bg-emerald-500/10">
+            <span className="badge-dot bg-emerald-400 animate-pulse" />
             AGENT ONLINE
           </span>
-          <span className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/25 bg-cyan-500/10 text-cyan-200 text-xs font-terminal">
+          <span className="badge font-terminal text-xs text-cyan-200 border-cyan-500/25 bg-cyan-500/10 hidden sm:inline-flex">
             LATENCY 42ms
           </span>
         </div>
@@ -48,20 +48,20 @@ export default function Page() {
 
       {/* Main grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        <section className="lg:col-span-4 terminal-panel terminal-panel-hover border p-5">
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm font-terminal tracking-wider text-slate-300">TOKEN / CLAW</h2>
-            <span className="text-[10px] font-terminal text-slate-500">MCv2 • Base</span>
+        <section className="lg:col-span-4 panel panel-hover p-5">
+          <div className="panel-header">
+            <h2 className="panel-title font-terminal">TOKEN / CLAW</h2>
+            <span className="panel-meta font-terminal">MCv2 • Base</span>
           </div>
           <div className="mt-4">
             <TokenStatus />
           </div>
         </section>
 
-        <section className="lg:col-span-8 terminal-panel terminal-panel-hover border p-5">
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm font-terminal tracking-wider text-slate-300">GEOPOLITICAL PULSE</h2>
-            <span className="text-[10px] font-terminal text-slate-500">SENTIMENT • SIGNALS</span>
+        <section className="lg:col-span-8 panel panel-hover p-5">
+          <div className="panel-header">
+            <h2 className="panel-title font-terminal">GEOPOLITICAL PULSE</h2>
+            <span className="panel-meta font-terminal">SENTIMENT • SIGNALS</span>
           </div>
           <div className="mt-4">
             <GeoPulse />
@@ -70,10 +70,10 @@ export default function Page() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        <section className="lg:col-span-6 terminal-panel terminal-panel-hover border p-5">
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm font-terminal tracking-wider text-slate-300">RECENT ACTIONS</h2>
-            <span className="text-[10px] font-terminal text-slate-500">SYSTEM</span>
+        <section className="lg:col-span-6 panel panel-hover p-5">
+          <div className="panel-header">
+            <h2 className="panel-title font-terminal">RECENT ACTIONS</h2>
+            <span className="panel-meta font-terminal">SYSTEM</span>
           </div>
           <div className="mt-4 space-y-2 font-terminal text-xs text-slate-400">
             <div className="flex gap-3"><span className="text-slate-500">08:32</span><span>System initialization complete.</span></div>
@@ -82,10 +82,10 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="lg:col-span-6 terminal-panel terminal-panel-hover border p-5">
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm font-terminal tracking-wider text-slate-300">AGENT CONSOLE</h2>
-            <span className="text-[10px] font-terminal text-slate-500">REASONING</span>
+        <section className="lg:col-span-6 panel panel-hover p-5">
+          <div className="panel-header">
+            <h2 className="panel-title font-terminal">AGENT CONSOLE</h2>
+            <span className="panel-meta font-terminal">REASONING</span>
           </div>
           <div className="mt-4 bg-black/50 border border-slate-800 rounded-lg p-4 font-terminal text-xs text-emerald-200">
             <div>$ analyzing macro + tariff headlines → volatility regime</div>

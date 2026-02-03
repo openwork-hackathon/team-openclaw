@@ -3,15 +3,23 @@
 @tailwind utilities;
 
 :root {
+  /* base palette */
   --ow-bg: 3 7 18;
   --ow-panel: 6 12 25;
   --ow-border: 40 54 79;
   --ow-text: 226 232 240;
   --ow-sub: 148 163 184;
 
+  /* accents */
   --ow-cyan: 34 211 238;
   --ow-amber: 251 191 36;
   --ow-lime: 163 230 53;
+
+  /* spacing + shape */
+  --ow-radius: 12px;
+  --ow-radius-sm: 10px;
+  --ow-panel-alpha: 0.74;
+  --ow-panel-alpha-hover: 0.84;
 }
 
 html,
@@ -21,72 +29,117 @@ body {
 
 body {
   color: rgb(var(--ow-text));
-  background: radial-gradient(1000px 600px at 20% 10%, rgba(34, 211, 238, 0.10), transparent 60%),
+  background:
+    radial-gradient(1000px 600px at 20% 10%, rgba(34, 211, 238, 0.10), transparent 60%),
     radial-gradient(900px 540px at 85% 20%, rgba(251, 191, 36, 0.08), transparent 55%),
     linear-gradient(180deg, rgb(var(--ow-bg)), rgb(0 0 0));
 }
 
-/* Bloomberg/terminal vibe helpers */
-.terminal-shell {
-  position: relative;
-}
+/*
+  Bloomberg/terminal vibe:
+  - subtle grid
+  - glassy panels
+  - tight, mono-friendly typography
+*/
 
-.terminal-shell::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(closest-side at 30% 30%, rgba(0,0,0,0.9), rgba(0,0,0,0.25), rgba(0,0,0,0));
-  opacity: 0.55;
-}
+@layer components {
+  .terminal-shell {
+    position: relative;
+  }
 
-.terminal-panel {
-  background: rgba(var(--ow-panel), 0.72);
-  border-color: rgba(var(--ow-border), 0.55);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 10px 30px rgba(0, 0, 0, 0.35);
-  border-radius: 12px;
-}
+  .terminal-shell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(closest-side at 30% 30%, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
+    opacity: 0.55;
+  }
 
-.terminal-panel-hover {
-  transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease;
-}
+  .font-terminal {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
 
-.terminal-panel-hover:hover {
-  transform: translateY(-1px);
-  border-color: rgba(var(--ow-border), 0.9);
-  background: rgba(var(--ow-panel), 0.82);
-}
+  /* Panel primitives */
+  .panel {
+    border-radius: var(--ow-radius);
+    background: rgba(var(--ow-panel), var(--ow-panel-alpha));
+    border: 1px solid rgba(var(--ow-border), 0.55);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 10px 30px rgba(0, 0, 0, 0.35);
+  }
 
-.terminal-label {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgb(var(--ow-sub));
-}
+  .panel-hover {
+    transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease;
+  }
 
-.terminal-value {
-  font-size: 28px;
-  font-weight: 650;
-  line-height: 1.1;
-}
+  .panel-hover:hover {
+    transform: translateY(-1px);
+    border-color: rgba(var(--ow-border), 0.9);
+    background: rgba(var(--ow-panel), var(--ow-panel-alpha-hover));
+  }
 
-.terminal-unit {
-  font-size: 12px;
-  color: rgb(var(--ow-sub));
-}
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
 
-.terminal-sub {
-  font-size: 12px;
-  color: rgb(var(--ow-sub));
-}
+  .panel-title {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(var(--ow-sub));
+  }
 
-/* tighter, data-dense typography */
-.font-terminal {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  .panel-meta {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--ow-sub));
+    opacity: 0.8;
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(var(--ow-border), 0.55);
+    background: rgba(0, 0, 0, 0.22);
+  }
+
+  .badge-dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 999px;
+  }
+
+  /* KPI */
+  .kpi-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(var(--ow-sub));
+  }
+
+  .kpi-value {
+    font-size: 28px;
+    font-weight: 650;
+    line-height: 1.1;
+  }
+
+  .kpi-unit,
+  .kpi-sub {
+    font-size: 12px;
+    color: rgb(var(--ow-sub));
+  }
 }
