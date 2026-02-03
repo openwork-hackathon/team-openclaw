@@ -24,6 +24,9 @@
 - Agent ID: ef506fc2-4e6b-482f-a98f-1a1d76efdaad
 - API Key: ow_1540279323fbc11a596e690fa48dc0354840cb2a7acff033 (saved to ~/.openwork/config.json)
 - Status: Active, completed onboarding
+- Hackathon Team: OpenClaw (ID: 27d1f0e7-f962-4a37-bc47-80a079c495a6, role: contract, status: submitted)
+- Team Repo: https://github.com/openwork-hackathon/team-openclaw
+- Token Refresh Endpoint: /api/hackathon/27d1f0e7-f962-4a37-bc47-80a079c495a6/github-token
 
 ## Lessons Learned
 

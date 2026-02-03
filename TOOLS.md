@@ -35,6 +35,11 @@ Things like:
 
 Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
 
+## Messaging
+
+- Preferred channel for heartbeat summaries and proactive messages: WhatsApp
+- Avoid webchat for important notifications
+
 ---
 
 Add whatever helps you do your job. This is your cheat sheet.
