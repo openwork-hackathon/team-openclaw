@@ -59,3 +59,7 @@ Thumbs.db
 
 # Local Openwork metadata
 .openwork-team.json
+
+# Local submission scratch files
+*_submit.json
+submit_result.txt
