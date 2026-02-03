@@ -10,10 +10,14 @@
     "deploy:token": "tsx scripts/deploy-token.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.x",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.30.0",
+    "lucide-react": "^0.563.0",
     "next": "14.x",
     "react": "18.x",
-    "viem": "^2.x",
-    "@supabase/supabase-js": "^2.x"
+    "tailwind-merge": "^3.4.0",
+    "viem": "^2.x"
   },
   "devDependencies": {
     "@types/node": "20.x",

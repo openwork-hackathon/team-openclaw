@@ -1,4 +1,4 @@
-# 🦞 OpenClaw
+# 🦁 OpenClaw
 
 > Autonomous geopolitics + crypto trading agent on Base. Posts on social platforms, deploys token, and analyzes wars/tariffs for crypto markets.
 
@@ -23,11 +23,13 @@
 - Backend infrastructure setup (API routes, config, env)
 - Health check endpoint deployed
 - **Token deployment infrastructure** (Mint Club V2 integration) 
+- **Dashboard UI Updated** with live components 🚀
 
 ### 🔨 In Progress
 - Token deployment to Base mainnet (#5 - Optimus)
 - Geopolitical news analysis service (#2)
 - Base DEX trading integration (#3)
+- Real-time reasoning log integration 🔨
 
 ## What We're Building
 An autonomous agent that:
@@ -48,7 +50,7 @@ An autonomous agent that:
 
 The platform token for the OpenClaw agent, deployed on Base with a bonding curve.
 
-**Specs:**
+Specs:
 - **Name:** OpenClaw
 - **Symbol:** CLAW
 - **Max Supply:** 1,000,000 tokens
@@ -56,12 +58,11 @@ The platform token for the OpenClaw agent, deployed on Base with a bonding curve
 - **Bonding Curve:** 3-step pricing (0.001 → 0.005 → 0.01 OPENWORK)
 - **Royalties:** 1% mint/burn
 
-**Contracts (Base):**
-- Bond: `0xc5a076cad94176c2996B32d8466Be1cE757FAa27`
-- Reserve: `0x299c30DD5974BF4D5bFE42C340CA40462816AB07` ($OPENWORK)
+Contracts (Base):
+- **Bond:** [0xc5a076cad94176c2996B32d8466Be1cE757FAa27](https://basescan.org/address/0xc5a076cad94176c2996B32d8466Be1cE757FAa27)
+- **Reserve:** [0x299c30DD5974BF4D5bFE42C340CA40462816AB07](https://basescan.org/address/0x299c30DD5974BF4D5bFE42C340CA40462816AB07) ($OPENWORK)
 
 ### Deploy Token
-
 ```bash
 # Set your private key
 export PRIVATE_KEY=0x...
@@ -71,28 +72,28 @@ npm run deploy:token
 ```
 
 ### API Endpoints
-
 ```bash
 # Get token info
 GET /api/token/info
 ```
 
 ## Architecture
-```
+
+```text
 ┌─────────────────────────────────────────────────────┐
-│              OpenClaw Agent                         │
+│                   OpenClaw Agent                    │
 ├─────────────────────────────────────────────────────┤
-│  ┌──────────┐  ┌──────────┐  ┌──────────────────┐  │
-│  │   Geo    │  │ Trading │  │     Social       │  │
-│  │ Analysis │  │  Engine │  │     Poster       │  │
-│  └────┬─────┘  └────┬─────┘  └────────┬─────────┘  │
-│       │             │                  │            │
-│       └─────────────┼──────────────────┘            │
-│                     ▼                               │
-│            ┌──────────────────┐                    │
-│            │  Token Manager   │                    │
-│            │ (Mint Club V2)   │                    │
-│            └──────────────────┘                    │
+│ ┌──────────┐      ┌──────────┐      ┌──────────────────┐ │
+│ │   Geo    │      │ Trading  │      │     Social       │ │
+│ │ Analysis │      │  Engine  │      │     Poster       │ │
+│ └────┬─────┘      └────┬─────┘      └────────┬─────────┘ │
+│      │                 │                     │           │
+│      └─────────────┬───┴─────────────────────┘           │
+│                    ▼                                     │
+│          ┌──────────────────┐                            │
+│          │  Token Manager   │                            │
+│          │ (Mint Club V2)   │                            │
+│          └──────────────────┘                            │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -102,11 +103,11 @@ GET /api/token/info
 |---------|--------|-------|----|
 | Backend infrastructure setup | ✅ Done | NightWorker | #6 |
 | Next.js API routes | 🔨 In Progress | NightWorker | — |
-| **Token deployment infrastructure** | **✅ Done** | **Optimus** | **#9** |
+| Token deployment infrastructure | ✅ Done | Optimus | #9 |
 | Token deployment (mainnet) | 🔨 In Progress | Optimus | — |
 | Geopolitical news analysis | 📋 Planned | NightWorker | #2 |
-| Base DEX trading integration | 📋 Planned | _Open_ | #3 |
-| Social platform posting | 📋 Planned | _Open_ | #4 |
+| Base DEX trading integration | 📋 Planned | Open | #3 |
+| Social platform posting | 📋 Planned | Open | #4 |
 
 ### Status Legend
 - ✅ Done and deployed
@@ -121,17 +122,18 @@ GET /api/token/info
 | Code Quality | 30% |
 | Community Vote | 30% |
 
-**Remember:** Ship > Perfect.
+Remember: **Ship > Perfect.**
 
 ## 📂 Project Structure
 
-```
+```text
 ├── README.md           ← You are here
 ├── SKILL.md            ← Agent coordination guide
 ├── HEARTBEAT.md        ← Periodic check-in tasks
 ├── app/                ← Next.js app router
-│   └── api/            ← API routes
-│       └── token/      ← Token endpoints
+│   ├── api/            ← API routes
+│   │   └── token/      ← Token endpoints
+│   └── components/     ← Shared React components
 ├── lib/                ← Utilities & config
 │   └── token/          ← Token deployment logic
 ├── contracts/          ← Contract ABIs
@@ -145,6 +147,4 @@ GET /api/token/info
 - [Openwork Platform](https://www.openwork.bot)
 - [Team Repo](https://github.com/openwork-hackathon/team-openclaw)
 
----
-
-*Built by AI agents during the Openwork Clawathon*
+Built by AI agents during the Openwork Clawathon
