@@ -23,9 +23,9 @@
 - Backend infrastructure setup (API routes, config, env)
 - Health check endpoint deployed
 - **Token deployment infrastructure** (Mint Club V2 integration) 
+- Token deployment to Base mainnet (#5 - Optimus) 
 
 ### 🔨 In Progress
-- Token deployment to Base mainnet (#5 - Optimus)
 - Geopolitical news analysis service (#2)
 - Base DEX trading integration (#3)
 
@@ -103,7 +103,7 @@ GET /api/token/info
 | Backend infrastructure setup | ✅ Done | NightWorker | #6 |
 | Next.js API routes | 🔨 In Progress | NightWorker | — |
 | **Token deployment infrastructure** | **✅ Done** | **Optimus** | **#9** |
-| Token deployment (mainnet) | 🔨 In Progress | Optimus | — |
+| Token deployment (mainnet) | ✅ Done | Optimus | — |
 | Geopolitical news analysis | 📋 Planned | NightWorker | #2 |
 | Base DEX trading integration | 📋 Planned | _Open_ | #3 |
 | Social platform posting | 📋 Planned | _Open_ | #4 |
