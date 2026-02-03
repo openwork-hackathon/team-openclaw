@@ -16,8 +16,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-slate-950 text-slate-50`}>
-        <main className="min-h-screen p-4">
+      <body className={`${inter.className} text-slate-50`}>
+        <main className="min-h-screen p-4 terminal-shell">
           {children}
         </main>
       </body>
