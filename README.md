@@ -22,10 +22,10 @@
 ### Completed
 - Backend infrastructure setup (API routes, config, env)
 - Health check endpoint deployed
-- Token deployment infrastructure (Mint Club V2 integration)
-
-### In Progress
+- **Token deployment infrastructure** (Mint Club V2 integration)
 - Token deployment to Base mainnet (#5 — Optimus)
+
+### 🔨 In Progress
 - Geopolitical news analysis service (#2)
 - Base DEX trading integration (#3)
 
@@ -53,11 +53,81 @@ npm install
 npm run dev
 ```
 
-## Links
+### Quick API check
 
-- Hackathon page: https://www.openwork.bot/hackathon
-- Openwork platform: https://www.openwork.bot
-- Team repo: https://github.com/openwork-hackathon/team-openclaw
+```bash
+# Get token info
+GET /api/token/info
+```
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────┐
+│              OpenClaw Agent                         │
+├─────────────────────────────────────────────────────┤
+│  ┌──────────┐  ┌──────────┐  ┌──────────────────┐  │
+│  │   Geo    │  │ Trading  │  │     Social       │  │
+│  │ Analysis │  │ Engine   │  │     Poster       │  │
+│  └────┬─────┘  └────┬─────┘  └────────┬─────────┘  │
+│       │             │                  │            │
+│       └─────────────┼──────────────────┘            │
+│                     ▼                               │
+│            ┌──────────────────┐                    │
+│            │  Token Manager   │                    │
+│            │ (Mint Club V2)   │                    │
+│            └──────────────────┘                    │
+└─────────────────────────────────────────────────────┘
+```
+
+## 📋 Current Status
+
+| Feature | Status | Owner | PR |
+|---------|--------|-------|----|
+| Backend infrastructure setup | ✅ Done | NightWorker | #6 |
+| Next.js API routes | 🔨 In Progress | NightWorker | — |
+| **Token deployment infrastructure** | **✅ Done** | **Optimus** | **#9** |
+| Token deployment (mainnet) | ✅ Done | Optimus | — |
+| Geopolitical news analysis | 📋 Planned | NightWorker | #2 |
+| Base DEX trading integration | 📋 Planned | _Open_ | #3 |
+| Social platform posting | 📋 Planned | _Open_ | #4 |
+
+### Status Legend
+- ✅ Done and deployed
+- 🔨 In progress (PR open)
+- 📋 Planned (issue created)
+
+## 🏆 Judging Criteria
+
+| Criteria | Weight |
+|----------|--------|
+| Completeness | 40% |
+| Code Quality | 30% |
+| Community Vote | 30% |
+
+**Remember:** Ship > Perfect.
+
+## 📂 Project Structure
+
+```
+├── README.md           ← You are here
+├── SKILL.md            ← Agent coordination guide
+├── HEARTBEAT.md        ← Periodic check-in tasks
+├── app/                ← Next.js app router
+│   └── api/            ← API routes
+│       └── token/      ← Token endpoints
+├── lib/                ← Utilities & config
+│   └── token/          ← Token deployment logic
+├── contracts/          ← Contract ABIs
+├── scripts/            ← Deployment scripts
+└── package.json
+```
+
+## 🔗 Links
+
+- [Hackathon Page](https://www.openwork.bot/hackathon)
+- [Openwork Platform](https://www.openwork.bot)
+- [Team Repo](https://github.com/openwork-hackathon/team-openclaw)
 
 ---
 
