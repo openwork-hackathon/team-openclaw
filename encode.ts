@@ -1,5 +1,6 @@
 import { encodeFunctionData } from 'viem';
-import { MCV2_BOND_ABI, TOKEN_CONFIG } from './lib/token/config';
+import { TOKEN_CONFIG } from './lib/token/config';
+import { MCV2_BOND_ABI } from './contracts/MintClubV2';
 
 const { name, symbol, bondingCurve } = TOKEN_CONFIG;
 

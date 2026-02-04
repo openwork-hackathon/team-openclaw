@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { geoAnalyzer } from '../../lib/geo/analyzer';
+import { geoAnalyzer } from '@/lib/geo/analyzer';
 
 export async function GET(request: NextRequest) {
   const topic = request.nextUrl.searchParams.get('q');

@@ -28,9 +28,10 @@ function analyzeSentiment(text: string): 'positive' | 'negative' | 'neutral' {
   return 'neutral';
 }
 
-function estimateCryptoImpact(text: string): string {
-  if (['war', 'conflict', 'sanction', 'crisis'].some(w => text.includes(w))) return 'risk-off';
-  if (['peace', 'deal', 'adoption'].some(w => text.includes(w))) return 'risk-on';
+function estimateCryptoImpact(text: string): 'risk-on' | 'risk-off' | 'neutral' {
+  const lower = text.toLowerCase();
+  if (['war', 'conflict', 'sanction', 'crisis'].some(w => lower.includes(w))) return 'risk-off';
+  if (['peace', 'deal', 'adoption'].some(w => lower.includes(w))) return 'risk-on';
   return 'neutral';
 }
 

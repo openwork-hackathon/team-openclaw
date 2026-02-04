@@ -1,4 +1,4 @@
-import { createPublicClient, createWalletClient, http, parseEther } from 'viem';
+import { createPublicClient, createWalletClient, http } from 'viem';
 import { base } from 'viem/chains';
 import { privateKeyToAccount } from 'viem/accounts';
 import {
@@ -29,8 +29,14 @@ export async function deployToken(privateKey: `0x${string}`) {
   console.log('🚀 Deploying OpenClaw token...');
   console.log('Deployer:', account.address);
 
-  // Step 1: Check creation fee
-  const creationFee = await publicClient.readContract({
+  // Step 1: Check creation fee (narrow cast to avoid viem 2.x typing churn)
+  const readCreationFee = publicClient.readContract as unknown as (args: {
+    address: typeof MCV2_BOND_ADDRESS;
+    abi: typeof MCV2_BOND_ABI;
+    functionName: 'creationFee';
+  }) => Promise<bigint>;
+
+  const creationFee = await readCreationFee({
     address: MCV2_BOND_ADDRESS,
     abi: MCV2_BOND_ABI,
     functionName: 'creationFee',
@@ -49,15 +55,15 @@ export async function deployToken(privateKey: `0x${string}`) {
   // Step 3: Create the token
   const { name, symbol, bondingCurve } = TOKEN_CONFIG;
   
-  const hash = await walletClient.writeContract({
+  // viem writeContract types also churn; keep the script callable by using a narrow cast.
+  const writeContract = walletClient.writeContract as unknown as (args: unknown) => Promise<`0x${string}`>;
+
+  const hash = await writeContract({
     address: MCV2_BOND_ADDRESS,
     abi: MCV2_BOND_ABI,
     functionName: 'createToken',
     args: [
-      {
-        name,
-        symbol,
-      },
+      { name, symbol },
       {
         mintRoyalty: bondingCurve.mintRoyalty,
         burnRoyalty: bondingCurve.burnRoyalty,
@@ -121,7 +127,9 @@ export async function buyTokens(
   });
 
   // Step 1: Approve OPENWORK spending
-  const approvalHash = await walletClient.writeContract({
+  const writeContract = walletClient.writeContract as unknown as (args: unknown) => Promise<`0x${string}`>;
+
+  const approvalHash = await writeContract({
     address: OPENWORK_TOKEN_ADDRESS,
     abi: ERC20_ABI,
     functionName: 'approve',
@@ -131,7 +139,7 @@ export async function buyTokens(
   await publicClient.waitForTransactionReceipt({ hash: approvalHash });
 
   // Step 2: Mint tokens
-  const mintHash = await walletClient.writeContract({
+  const mintHash = await writeContract({
     address: MCV2_BOND_ADDRESS,
     abi: MCV2_BOND_ABI,
     functionName: 'mint',

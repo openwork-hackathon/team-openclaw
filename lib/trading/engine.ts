@@ -25,7 +25,7 @@ export class TradingEngine {
   }
   
   async getPortfolio(wallet: string) {
-    return { ETH: '0', USDC: '0' };
+    return { wallet, balances: { ETH: '0', USDC: '0' } };
   }
 }
 

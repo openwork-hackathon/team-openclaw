@@ -7,7 +7,7 @@ import { MCV2_BOND_ADDRESS, MCV2_BOND_ABI, OPENWORK_TOKEN_ADDRESS, ERC20_ABI } f
 export async function getTokenStatus(tokenAddress?: `0x${string}`, walletAddress?: `0x${string}`) {
   const { publicClient } = createClients();
   
-  const status: any = {
+  const status: Record<string, unknown> = {
     network: 'Base',
     chainId: 8453,
     bondContract: MCV2_BOND_ADDRESS,
@@ -27,7 +27,14 @@ export async function getTokenStatus(tokenAddress?: `0x${string}`, walletAddress
     const ethBalance = await publicClient.getBalance({ address: walletAddress });
     
     // Check OPENWORK balance
-    const openworkBalance = await publicClient.readContract({
+    const readBalanceOf = publicClient.readContract as unknown as (args: {
+      address: typeof OPENWORK_TOKEN_ADDRESS;
+      abi: typeof ERC20_ABI;
+      functionName: 'balanceOf';
+      args: readonly [`0x${string}`];
+    }) => Promise<bigint>;
+
+    const openworkBalance = await readBalanceOf({
       address: OPENWORK_TOKEN_ADDRESS,
       abi: ERC20_ABI,
       functionName: 'balanceOf',
@@ -53,8 +60,14 @@ export async function checkDeploymentReadiness(walletAddress: `0x${string}`) {
   // Check ETH balance
   const ethBalance = await publicClient.getBalance({ address: walletAddress });
   
-  // Check creation fee
-  const creationFee = await publicClient.readContract({
+  // Check creation fee (narrow cast to avoid viem 2.x typing churn)
+  const readCreationFee = publicClient.readContract as unknown as (args: {
+    address: typeof MCV2_BOND_ADDRESS;
+    abi: typeof MCV2_BOND_ABI;
+    functionName: 'creationFee';
+  }) => Promise<bigint>;
+
+  const creationFee = await readCreationFee({
     address: MCV2_BOND_ADDRESS,
     abi: MCV2_BOND_ABI,
     functionName: 'creationFee',

@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createPublicClient, http, formatEther } from 'viem';
 import { base } from 'viem/chains';
-import { MCV2_BOND_ADDRESS, MCV2_BOND_ABI } from '@/contracts/MintClubV2';
 
 /**
  * GET /api/token/stats
@@ -36,7 +35,15 @@ export async function GET() {
     ];
 
     // Query total supply from the token contract
-    const totalSupply = await publicClient.readContract({
+    // viem's ReadContractParameters typing changed across 2.x versions; keep this route
+    // resilient by using a narrow cast for this specific call.
+    const readTotalSupply = publicClient.readContract as unknown as (args: {
+      address: `0x${string}`;
+      abi: typeof erc20Abi;
+      functionName: 'totalSupply';
+    }) => Promise<bigint>;
+
+    const totalSupply = await readTotalSupply({
       address: tokenAddress as `0x${string}`,
       abi: erc20Abi,
       functionName: 'totalSupply',
