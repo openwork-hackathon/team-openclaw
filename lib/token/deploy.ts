@@ -86,12 +86,36 @@ export async function deployToken(privateKey: `0x${string}`) {
     throw new Error('Token deployment failed');
   }
 
-  // Extract token address from logs
-  const tokenAddress = receipt.logs[0]?.address;
-  
-  if (!tokenAddress) {
-    throw new Error('Could not extract token address from deployment');
+  // Derive token address via Mint Club Bond state (more reliable than log heuristics)
+  const readTokenCount = publicClient.readContract as unknown as (args: {
+    address: typeof MCV2_BOND_ADDRESS;
+    abi: typeof MCV2_BOND_ABI;
+    functionName: 'tokenCount';
+  }) => Promise<bigint>;
+
+  const readTokensCreated = publicClient.readContract as unknown as (args: {
+    address: typeof MCV2_BOND_ADDRESS;
+    abi: typeof MCV2_BOND_ABI;
+    functionName: 'tokensCreated';
+    args: [bigint];
+  }) => Promise<`0x${string}`>;
+
+  const count = await readTokenCount({
+    address: MCV2_BOND_ADDRESS,
+    abi: MCV2_BOND_ABI,
+    functionName: 'tokenCount',
+  });
+
+  if (count === 0n) {
+    throw new Error('Token deployment succeeded but tokenCount is 0; cannot resolve token address');
   }
+
+  const tokenAddress = await readTokensCreated({
+    address: MCV2_BOND_ADDRESS,
+    abi: MCV2_BOND_ABI,
+    functionName: 'tokensCreated',
+    args: [count - 1n],
+  });
 
   console.log('✅ Token deployed successfully!');
   console.log(`Token address: ${tokenAddress}`);
