@@ -37,7 +37,7 @@ export function validateAmount(amount: string | bigint): { valid: boolean; error
   try {
     const value = typeof amount === 'string' ? BigInt(amount) : amount;
     
-    if (value <= 0n) {
+    if (value <= BigInt(0)) {
       return { valid: false, error: 'Amount must be greater than 0' };
     }
     

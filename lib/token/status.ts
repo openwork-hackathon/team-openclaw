@@ -27,12 +27,13 @@ export async function getTokenStatus(tokenAddress?: `0x${string}`, walletAddress
     const ethBalance = await publicClient.getBalance({ address: walletAddress });
     
     // Check OPENWORK balance
-    const openworkBalance = await publicClient.readContract({
+    const openworkBalance = (await publicClient.readContract({
       address: OPENWORK_TOKEN_ADDRESS,
-      abi: ERC20_ABI,
+      abi: ERC20_ABI as any,
       functionName: 'balanceOf',
       args: [walletAddress],
-    });
+      authorizationList: [] as any,
+    } as any)) as bigint;
 
     status.wallet = {
       address: walletAddress,
@@ -54,11 +55,12 @@ export async function checkDeploymentReadiness(walletAddress: `0x${string}`) {
   const ethBalance = await publicClient.getBalance({ address: walletAddress });
   
   // Check creation fee
-  const creationFee = await publicClient.readContract({
+  const creationFee = (await publicClient.readContract({
     address: MCV2_BOND_ADDRESS,
-    abi: MCV2_BOND_ABI,
+    abi: MCV2_BOND_ABI as any,
     functionName: 'creationFee',
-  });
+    authorizationList: [] as any,
+  } as any)) as bigint;
 
   const hasEnoughEth = ethBalance > creationFee + BigInt(1e15); // Fee + some buffer for gas
 

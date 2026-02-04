@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { tradingEngine, BASE_TOKENS } from '../../../lib/trading/engine';
+import { tradingEngine, BASE_TOKENS } from '../../../../lib/trading/engine';
 
 export async function GET(request: NextRequest) {
   const tokenIn = request.nextUrl.searchParams.get('tokenIn') || 'ETH';

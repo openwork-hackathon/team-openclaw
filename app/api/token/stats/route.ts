@@ -38,11 +38,13 @@ export async function GET() {
     // Query total supply from the token contract
     const totalSupply = await publicClient.readContract({
       address: tokenAddress as `0x${string}`,
-      abi: erc20Abi,
+      abi: erc20Abi as any,
       functionName: 'totalSupply',
-    });
+      // viem typings (newer releases) may require this field for EIP-7702 support.
+      authorizationList: [] as any,
+    } as any);
 
-    const totalSupplyFormatted = formatEther(totalSupply);
+    const totalSupplyFormatted = formatEther(totalSupply as bigint);
 
     const stats = {
       token: {

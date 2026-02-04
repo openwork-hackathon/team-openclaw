@@ -8,7 +8,8 @@ export interface Token {
 
 export const BASE_TOKENS: Record<string, Token> = {
   ETH: { address: '0x0000000000000000000000000000000000000000', symbol: 'ETH', decimals: 18 },
-  USDC: { address: '0x833589fCD6eDb8E08d04dc5f7c414A3eCFaA59D7', symbol: 'USDC', decimals: 6 },
+  // Base USDC (native)
+  USDC: { address: process.env.USDC_ADDRESS ?? '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913', symbol: 'USDC', decimals: 6 },
 };
 
 export class TradingEngine {
@@ -16,8 +17,15 @@ export class TradingEngine {
   constructor(rpcUrl: string) { this.rpcUrl = rpcUrl; }
   
   async getQuote(tokenIn: string, tokenOut: string, amountIn: string) {
+    const inToken = BASE_TOKENS[tokenIn];
+    const outToken = BASE_TOKENS[tokenOut];
+
     return {
-      tokenIn, tokenOut, amountIn,
+      tokenIn,
+      tokenOut,
+      tokenInAddress: inToken?.address,
+      tokenOutAddress: outToken?.address,
+      amountIn,
       amountOut: (parseFloat(amountIn) * 0.999).toString(),
       priceImpact: 0.001,
       route: [tokenIn, tokenOut],

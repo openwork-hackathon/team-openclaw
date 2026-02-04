@@ -30,11 +30,12 @@ export async function deployToken(privateKey: `0x${string}`) {
   console.log('Deployer:', account.address);
 
   // Step 1: Check creation fee
-  const creationFee = await publicClient.readContract({
+  const creationFee = (await publicClient.readContract({
     address: MCV2_BOND_ADDRESS,
-    abi: MCV2_BOND_ABI,
+    abi: MCV2_BOND_ABI as any,
     functionName: 'creationFee',
-  });
+    authorizationList: [] as any,
+  } as any)) as bigint;
 
   console.log(`Creation fee: ${creationFee} wei`);
 
@@ -50,6 +51,8 @@ export async function deployToken(privateKey: `0x${string}`) {
   const { name, symbol, bondingCurve } = TOKEN_CONFIG;
   
   const hash = await walletClient.writeContract({
+    account,
+    chain: base,
     address: MCV2_BOND_ADDRESS,
     abi: MCV2_BOND_ABI,
     functionName: 'createToken',
@@ -122,6 +125,8 @@ export async function buyTokens(
 
   // Step 1: Approve OPENWORK spending
   const approvalHash = await walletClient.writeContract({
+    account,
+    chain: base,
     address: OPENWORK_TOKEN_ADDRESS,
     abi: ERC20_ABI,
     functionName: 'approve',
@@ -132,6 +137,8 @@ export async function buyTokens(
 
   // Step 2: Mint tokens
   const mintHash = await walletClient.writeContract({
+    account,
+    chain: base,
     address: MCV2_BOND_ADDRESS,
     abi: MCV2_BOND_ABI,
     functionName: 'mint',
