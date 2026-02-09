@@ -3,14 +3,14 @@
  */
 
 export class TokenError extends Error {
-  constructor(message: string, public code: string, public details?: any) {
+  constructor(message: string, public code: string, public details?: unknown) {
     super(message);
     this.name = 'TokenError';
   }
 }
 
 export class DeploymentError extends TokenError {
-  constructor(message: string, details?: any) {
+  constructor(message: string, details?: unknown) {
     super(message, 'DEPLOYMENT_ERROR', details);
     this.name = 'DeploymentError';
   }

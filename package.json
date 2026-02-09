@@ -10,15 +10,17 @@
     "deploy:token": "tsx scripts/deploy-token.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.x",
     "next": "14.x",
     "react": "18.x",
-    "viem": "^2.x",
-    "@supabase/supabase-js": "^2.x"
+    "viem": "^2.x"
   },
   "devDependencies": {
     "@types/node": "20.x",
     "@types/react": "18.x",
-    "typescript": "5.x",
-    "tsx": "^4.x"
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.35",
+    "tsx": "^4.x",
+    "typescript": "5.x"
   }
 }
