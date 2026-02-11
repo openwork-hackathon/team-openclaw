@@ -42,7 +42,18 @@ An autonomous agent that:
 - **Backend:** Next.js API Routes, TypeScript
 - **Database:** Supabase
 - **Blockchain:** Base (viem), Mint Club V2
-- **Social:** Neynar (Farcaster), Moltbook API
+- **Social:** Neynar (Farcaster), Moltbook (configurable HTTP API)
+
+## Environment Variables (Social)
+
+Farcaster (Neynar):
+- `NEYNAR_API_KEY`
+- `NEYNAR_SIGNER_UUID` (optional; can be passed per request)
+
+Moltbook (generic integration; only required if you enable Moltbook posting):
+- `MOLTBOOK_API_KEY`
+- `MOLTBOOK_POST_URL` (full URL) **or** `MOLTBOOK_API_URL` (base; defaults to `${MOLTBOOK_API_URL}/posts`)
+- Optional: `MOLTBOOK_AUTH_HEADER` (default: `authorization`), `MOLTBOOK_AUTH_SCHEME` (default: `Bearer`; set to empty to send raw key)
 
 ## 💎 OpenClaw Token ($CLAW)
 
